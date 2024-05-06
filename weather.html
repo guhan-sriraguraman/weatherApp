@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+</head>
+<body>
+    <div class="search">
+        <input type="text" placeholder="enter the city name">
+        <button>Search</button>
+    </div>
+    
+    <h1 class="temp">22°C</h1>
+    <h1 class="cityName">New York</h1>
+    <p class="humidity">50%</p>
+    <p >Humidity</p>
+    <p class="windSpeed">15 km/hr</p>
+    <p>Wind Speed</p>
+    <script>
+      const apiKey="ed70f91d7ab0d4dc90c8bab34867b57c"
+      const apiUrl="https://api.openweathermap.org/data/2.5/weather?units=metric&q="
+      const searchBox=document.querySelector(".search input")
+      const searchBtn=document.querySelector(".search button")
+      async function getweather(city){
+            const response= await fetch(apiUrl+city+`&appid=${apiKey}`)
+            const data=await response.json();
+           console.log(data);
+           document.querySelector('.temp').innerHTML=Math.round(data.main.temp)+"°C";
+           document.querySelector('.cityName').innerHTML=data.name;
+           document.querySelector('.humidity').innerHTML=data.main.humidity;
+           document.querySelector('.windSpeed').innerHTML=data.wind.speed;
+           
+      }
+      searchBtn.addEventListener('click',()=>{
+          getweather(searchBox.value)
+      })
+    </script>
+</body>
+</html>
