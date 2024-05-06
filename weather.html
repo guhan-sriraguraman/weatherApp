@@ -9,6 +9,9 @@
         .weather{
             display:none;
         }
+        .error{
+            display:none;
+        }
     </style>
 </head>
 
@@ -16,6 +19,9 @@
     <div class="search">
         <input type="text" placeholder="enter the city name">
         <button>Search</button>
+    </div>
+    <div class="error">
+        <h1>Invalid City Name</h1>
     </div>
 
     <div class="weather">
@@ -31,8 +37,14 @@
         const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q="
         const searchBox = document.querySelector(".search input")
         const searchBtn = document.querySelector(".search button")
+        
         async function getweather(city) {
             const response = await fetch(apiUrl + city + `&appid=${apiKey}`)
+            if(response.status==404){
+                document.querySelector(".error").style.display="block";
+                document.querySelector(".weather").style.display="none";
+
+            }
             const data = await response.json();
             console.log(data);
             document.querySelector('.temp').innerHTML = Math.round(data.main.temp) + "°C";
