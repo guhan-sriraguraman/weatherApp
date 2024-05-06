@@ -51,8 +51,9 @@
             document.querySelector('.cityName').innerHTML = data.name;
             document.querySelector('.humidity').innerHTML = data.main.humidity;
             document.querySelector('.windSpeed').innerHTML = data.wind.speed;
+            
             document.querySelector('.weather').style.display = "block";
-
+            document.querySelector('.error').style.display = "none";
         }
         searchBtn.addEventListener('click', () => {
             getweather(searchBox.value)
